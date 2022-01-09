@@ -7,20 +7,19 @@ from dash.dependencies import Input, Output
 
 # Imports from this application
 from app import app, server
-from pages import index, predictions, insights, process
+from pages import index, predictions
 
 # Navbar docs: https://dash-bootstrap-components.opensource.faculty.ai/l/components/navbar
 navbar = dbc.NavbarSimple(
     brand='Amsterdam Airbnb Price Predictor',
-    brand_href='/', 
-    children=[
-        dbc.NavItem(dcc.Link('Predictions', href='/predictions', className='nav-link')), 
-        dbc.NavItem(dcc.Link('Insights', href='/insights', className='nav-link')), 
-        dbc.NavItem(dcc.Link('Process', href='/process', className='nav-link')), 
-    ],
+    brand_href='/',
+    # children=[
+    #     dbc.NavItem(
+    #         dcc.Link('Predictions', href='/predictions', className='nav-link')),
+    # ],
     sticky='top',
-    color='primary', 
-    light=False, 
+    color='primary',
+    light=False,
     dark=True
 )
 
@@ -35,12 +34,16 @@ footer = dbc.Container(
         dbc.Col(
             html.P(
                 [
-                    html.Span('Gerrit van Zyll', className='mr-2'), 
-                    html.A(html.I(className='fas fa-envelope-square mr-1'), href='mailto:gerritvanzyll@gmail.com'), 
-                    html.A(html.I(className='fab fa-github-square mr-1'), href='https://github.com/gvanzyll/ams-airbnb-price-pred'), 
-                    html.A(html.I(className='fab fa-linkedin mr-1'), href='https://www.linkedin.com/in/gerrit-van-zyll//'), 
-                    html.A(html.I(className='fab fa-twitter-square mr-1'), href='https://twitter.com/gerrit_vz'), 
-                ], 
+                    html.Span('Gerrit van Zyll', className='mr-2'),
+                    html.A(html.I(className='fas fa-envelope-square mr-1'),
+                           href='mailto:gerritvanzyll@gmail.com'),
+                    html.A(html.I(className='fab fa-github-square mr-1'),
+                           href='https://github.com/gvanzyll/ams-airbnb-price-pred'),
+                    html.A(html.I(className='fab fa-linkedin mr-1'),
+                           href='https://www.linkedin.com/in/gerrit-van-zyll//'),
+                    html.A(html.I(className='fab fa-twitter-square mr-1'),
+                           href='https://twitter.com/gerrit_vz'),
+                ],
                 className='lead'
             )
         )
@@ -52,17 +55,17 @@ footer = dbc.Container(
 # dcc.Location: https://dash.plot.ly/dash-core-components/location
 # dbc.Container: https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
 app.layout = html.Div([
-    dcc.Location(id='url', refresh=False), 
-    navbar, 
-    dbc.Container(id='page-content', className='mt-4'), 
-    html.Hr(), 
+    dcc.Location(id='url', refresh=False),
+    navbar,
+    dbc.Container(id='page-content', className='mt-4'),
+    html.Hr(),
     footer
 ])
 
 
 # URL Routing for Multi-Page Apps: https://dash.plot.ly/urls
-@app.callback(Output('page-content', 'children'),
-              [Input('url', 'pathname')])
+@ app.callback(Output('page-content', 'children'),
+               [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/':
         return index.layout
@@ -74,6 +77,7 @@ def display_page(pathname):
         return process.layout
     else:
         return dcc.Markdown('## Page not found')
+
 
 # Run app server: https://dash.plot.ly/getting-started
 if __name__ == '__main__':
