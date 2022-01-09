@@ -22,22 +22,28 @@ column1 = dbc.Col(
 
             Plug in your ideal accomodation criteria and see how much to expect to spend.
 
-            ✅ 
-
             """
         ),
-        dcc.Link(dbc.Button('Predict Prices Now!', color='primary'), href='/predictions')
+        dcc.Link(dbc.Button('Predict Prices!', color='primary'),
+                 href='/predictions')
     ],
     md=4,
 )
 
 gapminder = px.data.gapminder()
 fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-           hover_name="country", log_x=True, size_max=60)
+                 hover_name="country", log_x=True, size_max=60)
+
+# column2 = dbc.Col(
+#     [
+#         dcc.Graph(figure=fig),
+#     ]
+# )
 
 column2 = dbc.Col(
     [
-        dcc.Graph(figure=fig),
+        html.Img(src='assets/home.jpg', className='img-fluid'),
+
     ]
 )
 
