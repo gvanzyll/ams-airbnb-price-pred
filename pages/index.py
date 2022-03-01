@@ -16,7 +16,7 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## Thinking about visitng Amsterdam?
+            ## Thinking about visiting Amsterdam?
              
             Great choice! Amsterdam is an amazing city with great people, tasty food, and much more.          
             
